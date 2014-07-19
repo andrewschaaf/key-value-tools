@@ -1,5 +1,8 @@
 **Tools for (bytes, bytes)-list streams/files/databases**
 
+[![Build Status](https://secure.travis-ci.org/andrewschaaf/key-value-tools.png)](http://travis-ci.org/andrewschaaf/key-value-tools)
+
+
 ### Tools
 
     ... | kv32-to-leveldb $DB_DIR

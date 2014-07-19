@@ -1,0 +1,8 @@
+language: cpp
+script: "bash build.sh && cd test && python test.py"
+branches:
+  only:
+    - master
+notifications:
+  email:
+    - andrew@andrewschaaf.com
