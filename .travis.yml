@@ -1,4 +1,8 @@
-language: cpp
+language: objective-c
+before_install:
+  - brew update
+  - brew install leveldb
+
 script: "bash build.sh && cd test && python test.py"
 branches:
   only:
