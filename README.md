@@ -71,8 +71,10 @@ The ev bytestream is a concatenation of zero or more of these:
 
 Support these:
 
+- SQLite file
 - Hadoop SequenceFile
 - Cassandra bulk import/export JSON
+- SQL `INSERT` statements with N rows per statement
 
 
 ### [License: MIT](LICENSE.txt)
