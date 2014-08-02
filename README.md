@@ -13,9 +13,18 @@
     ev-values -k $KEY foo.ev | ...concatenated values for key $KEY...
 
 
-### Python Library (uses the C library under the hood)
+### Python Library
 
-To concatenate fixed-width events as a matrix:
+Reading/writing kv32:
+
+```python
+from kvtools import kv32_iteritems, kv32_write_item
+
+for key, value in kv32_iteritems(sys.stdin):
+  kv32_write_item(sys.stdout, key, value)
+```
+
+To concatenate fixed-width events as a matrix, using the C library under the hood:
 
 ```python
 from kvtools import EVFile

@@ -1,4 +1,26 @@
-import os, ctypes, numpy
+import os, ctypes, struct, numpy
+
+
+def kv32_write_item(f, key, value):
+  assert len(key) < 2**32
+  assert len(value) < 2**32
+  f.write(struct.pack('<ii', len(key), len(value)))
+  f.write(key)
+  f.write(value)
+
+
+def kv32_iteritems(f):
+  while True:
+    sizes = f.read(8)
+    if len(sizes) == 0:
+      return
+    assert len(sizes) == 8
+    key_size, value_size = struct.unpack('<ii', sizes)
+    key = f.read(key_size)
+    value = f.read(value_size)
+    assert len(key) == key_size
+    assert len(value) == value_size
+    yield (key, value)
 
 
 class EVFile:

@@ -1,5 +1,6 @@
 import os, sys, subprocess
 import numpy
+from cStringIO import StringIO
 
 
 REPO_ROOT = '/'.join(os.path.abspath(__file__).split('/')[:-2])
@@ -43,6 +44,34 @@ def test_ev_tools():
 
 def test_python_library():
   sys.path.append('%s/python' % REPO_ROOT)
+  test_python_kv32_iteritems()
+  test_python_kv32_write_item()
+  test_python_EVFile()
+
+
+def test_python_kv32_iteritems():
+  from kvtools import kv32_iteritems
+  with open('foo.kv32', 'rb') as f:
+    items = list(kv32_iteritems(f))
+  assert items == [
+    ('', 'val-only'),
+    ('k\x00\xff2', 'v\x00\xff2'),
+    ('key', 'value'),
+    ('key-only', ''),
+    ('key1', 'val1'),
+    ('key2', 'val2')
+  ]
+
+
+def test_python_kv32_write_item():
+  from kvtools import kv32_write_item
+  f = StringIO()
+  kv32_write_item(f, 'k\x00\xff2', 'v\x00\xff2')
+  f.seek(0)
+  assert f.read() == '\x04\x00\x00\x00\x04\x00\x00\x00k\x00\xff2v\x00\xff2'
+
+
+def test_python_EVFile():
   from kvtools import EVFile
 
   m = EVFile('').event_as_matrix(123, ncols=3)
