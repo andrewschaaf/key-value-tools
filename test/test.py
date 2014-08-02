@@ -20,12 +20,15 @@ def main():
 
 
 def test_kv32_tools():
-  kv32 = read_data('foo.kv32')
-  (out, err) = check_communicate(['%s/kv32-to-leveldb' % BUILD_DIR, 'temp'], stdin=kv32)
+  foo_kv32 = read_data('foo.kv32')
+  (out, err) = check_communicate(['%s/kv32-to-leveldb' % BUILD_DIR, 'temp'], stdin=foo_kv32)
   assert out == ''
   assert err == ''
   (out, err) = check_communicate(['%s/leveldb-to-kv32' % BUILD_DIR, 'temp'])
-  assert out == kv32
+  assert out == foo_kv32
+  assert err == ''
+  (out, err) = check_communicate(['%s/bin/kv-map' % REPO_ROOT, 'wc'], stdin=foo_kv32)
+  assert out == read_data('foo-wc.kv32')
   assert err == ''
 
 
