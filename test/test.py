@@ -31,6 +31,9 @@ def test_kv32_tools():
   (out, err) = check_communicate(['%s/bin/kv-map' % REPO_ROOT, 'wc'], stdin=foo_kv32)
   assert out == read_data('foo-wc.kv32')
   assert err == ''
+  (out, err) = check_communicate(['%s/bin/kv-keys' % REPO_ROOT], stdin=foo_kv32)
+  assert out == "\nk\x00\xff2\nkey\nkey-only\nkey1\nkey2\n"
+  assert err == ''
 
 
 def test_ev_tools():

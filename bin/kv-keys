@@ -1,0 +1,10 @@
+#!/usr/bin/env python
+
+import os, sys
+
+REPO_ROOT = '/'.join(os.path.abspath(__file__).split('/')[:-2])
+
+sys.path.append(REPO_ROOT)
+sys.path.append("%s/python" % REPO_ROOT)
+from kv_keys import main
+main()

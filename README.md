@@ -5,6 +5,9 @@
 
 ### Command-line Tools
 
+
+    ...kv32... | kv-keys | ...(k + "\n") for k in keys...
+
     ...kv32... | kv-map 'convert ppm:- png:-' | ...kv32...
 
     ... | kv32-to-leveldb $DB_DIR
