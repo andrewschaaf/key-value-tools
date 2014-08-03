@@ -15,4 +15,7 @@ echo "Compiling ./build/kv32-to-leveldb..." &&
   gcc -o ./build/libkvtools.so -shared ./build/ev.o &&
   echo "Compiling ./build/ev-values..." &&
   gcc $C_ARGS -o build/ev-values ev-values.c &&
+  cd bin &&
+  ./kv-map --help | sed -e 's/optional arguments:/Arguments:/g' > ../doc/kv-map.txt &&
+  cd .. &&
   echo "Done."

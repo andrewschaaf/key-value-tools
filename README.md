@@ -5,14 +5,22 @@
 
 ### Command-line Tools
 
+See the `--help` pages (linked) for details.
 
+#### [kv-map](doc/kv-map.txt)
+    ...kv32... | kv-map --bash 'convert ppm:- png:-' | ...kv32...
+    ...kv32... | kv-map \
+                    --temp-dir /Volumes/ramdisk \
+                    --bash 'optipng $VALUE_FILE -out $RESULT_FILE -o7 -strip all -silent' | ...kv32...
+
+#### kv-keys
     ...kv32... | kv-keys | ...(k + "\n") for k in keys...
 
-    ...kv32... | kv-map 'convert ppm:- png:-' | ...kv32...
-
+#### kv32-to-leveldb, leveldb-to-kv32
     ... | kv32-to-leveldb $DB_DIR
     leveldb-to-kv32 $DB_DIR | ...
 
+#### ev-values
     ev-values -k $KEY foo.ev | ...concatenated values for key $KEY...
 
 
